@@ -93,6 +93,7 @@ public class MinesweeperGame extends Game {
         isGameStopped = true;
         showMessageDialog(Color.GRAY, "You loose", Color.WHITE, 20);
     }
+
     private void countMineNeighbors() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
