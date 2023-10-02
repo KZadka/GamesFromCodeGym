@@ -49,19 +49,19 @@ public class MinesweeperGame extends Game {
 
     private void openTile(int x, int y) {
         GameObject currentElement = gameField[x][y];
-        if (currentElement.isOpen) {
+        if (currentElement.isOpen || currentElement.isFlag || isGameStopped) {
             return;
         }
-        currentElement.isOpen = true;
         if (currentElement.isMine) {
             setCellValueEx(x, y, Color.RED, MINE);
             gameOver();
         }
+        currentElement.isOpen = true;
         if (!currentElement.isMine && currentElement.countMineNeighbors > 0) {
             setCellColor(x, y, Color.GREEN);
             setCellNumber(x, y, currentElement.countMineNeighbors);
         }
-        if (currentElement.isMine && currentElement.countMineNeighbors == 0) {
+        if (!currentElement.isMine && currentElement.countMineNeighbors == 0) {
             setCellColor(x, y, Color.GREEN);
             setCellValue(x, y, "");
             List<GameObject> fieldsList = getNeighbors(currentElement);
