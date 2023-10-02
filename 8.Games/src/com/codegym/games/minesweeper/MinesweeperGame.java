@@ -48,22 +48,23 @@ public class MinesweeperGame extends Game {
     }
 
     private void openTile(int x, int y) {
-        if (gameField[x][y].isOpen) {
+        GameObject currentElement = gameField[x][y];
+        if (currentElement.isOpen) {
             return;
         }
-        gameField[x][y].isOpen = true;
-        if (gameField[x][y].isMine) {
+        currentElement.isOpen = true;
+        if (currentElement.isMine) {
             setCellValueEx(x, y, Color.RED, MINE);
             gameOver();
         }
-        if (!gameField[x][y].isMine && gameField[x][y].countMineNeighbors > 0) {
+        if (!currentElement.isMine && currentElement.countMineNeighbors > 0) {
             setCellColor(x, y, Color.GREEN);
-            setCellNumber(x, y, gameField[x][y].countMineNeighbors);
+            setCellNumber(x, y, currentElement.countMineNeighbors);
         }
-        if (!gameField[x][y].isMine && gameField[x][y].countMineNeighbors == 0) {
+        if (currentElement.isMine && currentElement.countMineNeighbors == 0) {
             setCellColor(x, y, Color.GREEN);
             setCellValue(x, y, "");
-            List<GameObject> fieldsList = getNeighbors(gameField[x][y]);
+            List<GameObject> fieldsList = getNeighbors(currentElement);
             for (GameObject field : fieldsList) {
                 openTile(field.x, field.y);
             }
@@ -95,14 +96,15 @@ public class MinesweeperGame extends Game {
     private void countMineNeighbors() {
         for (int x = 0; x < SIDE; x++) {
             for (int y = 0; y < SIDE; y++) {
-                if (!(gameField[x][y].isMine)) {
+                GameObject currentElement = gameField[x][y];
+                if (!currentElement.isMine) {
                     int mines = 0;
-                    for (GameObject field : getNeighbors(gameField[x][y])) {
+                    for (GameObject field : getNeighbors(currentElement)) {
                         if (field.isMine) {
                             mines++;
                         }
                     }
-                    gameField[x][y].countMineNeighbors = mines;
+                    currentElement.countMineNeighbors = mines;
                 }
             }
         }
@@ -118,10 +120,11 @@ public class MinesweeperGame extends Game {
                 if (y < 0 || y >= SIDE) {
                     continue;
                 }
-                if (gameField[x][y].equals(gameObject)) {
+                GameObject currentElement = gameField[x][y];
+                if (currentElement.equals(gameObject)) {
                     continue;
                 }
-                result.add(gameField[x][y]);
+                result.add(currentElement);
             }
         }
         return result;
