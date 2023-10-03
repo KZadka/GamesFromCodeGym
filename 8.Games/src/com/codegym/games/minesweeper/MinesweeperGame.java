@@ -14,6 +14,7 @@ public class MinesweeperGame extends Game {
     private int countMinesOnField;
     private int countFlags;
     private int countClosedTiles = SIDE * SIDE;
+    private int score;
     private boolean isGameStopped;
 
     @Override
@@ -70,6 +71,10 @@ public class MinesweeperGame extends Game {
             for (GameObject field : fieldsList) {
                 openTile(field.x, field.y);
             }
+        }
+        if (currentElement.isOpen && !currentElement.isMine) {
+            score += 5;
+            setScore(score);
         }
         if (countClosedTiles == countMinesOnField && !currentElement.isMine) {
             win();
