@@ -29,7 +29,7 @@ public class Snake {
     public void draw(Game game) {
         Color snakeColor;
         for (int i = 0; i < snakeParts.size(); i++) {
-            if (this.isAlive) {
+            if (isAlive) {
                 snakeColor = Color.GREENYELLOW;
             } else {
                 snakeColor = Color.RED;
