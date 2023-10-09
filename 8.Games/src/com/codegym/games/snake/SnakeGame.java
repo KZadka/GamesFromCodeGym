@@ -12,6 +12,7 @@ public class SnakeGame extends Game {
     private int turnDelay;
     private int score;
     private boolean isGameStopped;
+
     @Override
     public void initialize() {
         setScreenSize(WIDTH, HEIGHT);
@@ -66,6 +67,7 @@ public class SnakeGame extends Game {
             apple = appleToBeCreated;
         }
     }
+
     private void createGame() {
         score = 0;
         snake = new Snake(WIDTH / 2, HEIGHT / 2);
