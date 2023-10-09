@@ -10,6 +10,7 @@ public class SnakeGame extends Game {
     private Snake snake;
     private Apple apple;
     private int turnDelay;
+    private int score;
     private boolean isGameStopped;
     @Override
     public void initialize() {
@@ -27,6 +28,8 @@ public class SnakeGame extends Game {
             gameOver();
         }
         if (!apple.isAlive) {
+            setScore(score += 5);
+            setTurnTimer(turnDelay -= 10);
             createNewApple();
         }
         drawScene();
@@ -64,11 +67,13 @@ public class SnakeGame extends Game {
         }
     }
     private void createGame() {
+        score = 0;
         snake = new Snake(WIDTH / 2, HEIGHT / 2);
-        createNewApple();
         turnDelay = 300;
-        setTurnTimer(turnDelay);
         isGameStopped = false;
+        createNewApple();
+        setTurnTimer(turnDelay);
+        setScore(score);
         drawScene();
     }
 
