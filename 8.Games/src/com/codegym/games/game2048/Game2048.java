@@ -12,13 +12,27 @@ public class Game2048 extends Game {
         drawScene();
     }
     private void createGame() {
-
+        createNewNumber();
+        createNewNumber();
     }
     private void drawScene() {
         for (int i = 0; i < gameField.length; i++) {
             for (int j = 0; j < gameField.length; j++) {
                 setCellColor(i, j, Color.AQUAMARINE);
             }
+        }
+    }
+    private void createNewNumber() {
+        int x = getRandomNumber(SIDE);
+        int y = getRandomNumber(SIDE);
+        int probability = getRandomNumber(10);
+        if (gameField[x][y] != 0) {
+            createNewNumber();
+        }
+        if (probability < 9) {
+            gameField[x][y] = 2;
+        } else {
+            gameField[x][y] = 4;
         }
     }
 }
