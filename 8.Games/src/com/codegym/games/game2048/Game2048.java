@@ -18,7 +18,7 @@ public class Game2048 extends Game {
     private void drawScene() {
         for (int i = 0; i < gameField.length; i++) {
             for (int j = 0; j < gameField.length; j++) {
-                setCellColor(i, j, Color.AQUAMARINE);
+                setCellColoredNumber(j, i, gameField[i][j]);
             }
         }
     }
@@ -33,6 +33,43 @@ public class Game2048 extends Game {
             gameField[x][y] = 2;
         } else {
             gameField[x][y] = 4;
+        }
+    }
+    private Color getColorByValue(int value) {
+        switch (value) {
+            case 0:
+                return Color.ALICEBLUE;
+            case 2:
+                return Color.AQUAMARINE;
+            case 4:
+                return Color.BISQUE;
+            case 8:
+                return Color.BLANCHEDALMOND;
+            case 16:
+                return Color.CORAL;
+            case 32:
+                return Color.DARKORCHID;
+            case 64:
+                return Color.CYAN;
+            case 128:
+                return Color.CRIMSON;
+            case 256:
+                return Color.FUCHSIA;
+            case 512:
+                return Color.DEEPPINK;
+            case 1024:
+                return Color.FORESTGREEN;
+            case 2048:
+                return Color.MOCCASIN;
+        }
+        return Color.WHITE;
+    }
+    private void setCellColoredNumber(int x, int y, int value) {
+        Color colorToSet = getColorByValue(value);
+        if (value == 0) {
+            setCellValueEx(x, y, colorToSet, "");
+        } else {
+            setCellValueEx(x, y, colorToSet, String.valueOf(value));
         }
     }
 }
