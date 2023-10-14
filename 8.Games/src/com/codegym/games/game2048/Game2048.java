@@ -2,6 +2,7 @@ package com.codegym.games.game2048;
 
 import com.codegym.engine.cell.Color;
 import com.codegym.engine.cell.Game;
+import com.codegym.engine.cell.Key;
 
 public class Game2048 extends Game {
     private static final int SIDE = 4;
@@ -14,6 +15,23 @@ public class Game2048 extends Game {
         drawScene();
         for (int i = 0; i < SIDE; i++) {
             compressRow(gameField[i]);
+        }
+    }
+    @Override
+    public void onKeyPress(Key key) {
+        switch (key) {
+            case LEFT:
+                moveLeft();
+                break;
+            case RIGHT:
+                moveRight();
+                break;
+            case UP:
+                moveUp();
+                break;
+            case DOWN:
+                moveDown();
+                break;
         }
     }
 
@@ -111,4 +129,8 @@ public class Game2048 extends Game {
         }
         return merged;
     }
+    private void moveLeft() {}
+    private void moveRight() {}
+    private void moveUp() {}
+    private void moveDown() {}
 }
