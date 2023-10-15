@@ -25,12 +25,15 @@ public class Game2048 extends Game {
                 break;
             case RIGHT:
                 moveRight();
+                drawScene();
                 break;
             case UP:
                 moveUp();
+                drawScene();
                 break;
             case DOWN:
                 moveDown();
+                drawScene();
                 break;
         }
     }
@@ -129,7 +132,21 @@ public class Game2048 extends Game {
         }
         return merged;
     }
-    private void moveLeft() {}
+    private void moveLeft() {
+        boolean moved = false;
+
+        for (int i = 0; i < gameField.length; i++) {
+            boolean rowMoved = compressRow(gameField[i]);
+            rowMoved = mergeRow(gameField[i]) || rowMoved;
+            rowMoved = compressRow(gameField[i]) || rowMoved;
+
+            if (rowMoved && !moved) {
+                createNewNumber();
+                moved = true;
+            }
+        }
+        drawScene();
+    }
     private void moveRight() {}
     private void moveUp() {}
     private void moveDown() {}
