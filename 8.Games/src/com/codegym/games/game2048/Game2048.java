@@ -147,9 +147,36 @@ public class Game2048 extends Game {
         }
         drawScene();
     }
-    private void moveRight() {}
-    private void moveUp() {}
-    private void moveDown() {}
+    private void moveRight() {
+        for (int i = 0; i < 4; i++) {
+            rotateClockwise();
+            printBoard();
+            if (i == 1) {
+                moveLeft();
+            }
+        }
+//        rotateClockwise();
+//        rotateClockwise();
+//        moveLeft();
+//        rotateClockwise();
+//        rotateClockwise();
+    }
+    private void moveUp() {
+        for (int i = 0; i < 4; i++) {
+            rotateClockwise();
+            if (i == 2) {
+                 moveLeft();
+            }
+        }
+    }
+    private void moveDown() {
+        for (int i = 0; i < 4; i++) {
+            rotateClockwise();
+            if (i == 0) {
+                moveLeft();
+            }
+        }
+    }
     private void rotateClockwise() {
         int[][] rotatedMatrix = new int[SIDE][SIDE];
 
@@ -160,5 +187,14 @@ public class Game2048 extends Game {
         }
 
         gameField = rotatedMatrix;
+    }
+    private void printBoard() {
+        System.out.println("Printing the board: ");
+        for (int i = 0; i < SIDE; i++) {
+            for (int j = 0; j < SIDE; j++) {
+                System.out.print(gameField[i][j]);
+            }
+            System.out.println();
+        }
     }
 }
